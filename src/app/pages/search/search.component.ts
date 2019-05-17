@@ -11,6 +11,7 @@ import { OmdbSearchResults } from '../../commons/interfaces/omdb-search-results.
 import { FilmsSearchResponseType } from '../../commons/enums/films-search-response-type.enum';
 import { OmdbResponseContent } from '../../commons/interfaces/omdb-response-content.interface';
 import { safeDetectChanges } from '../../utils/safe-detect-changes';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-search',
@@ -32,6 +33,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(private _formBuilder: FormBuilder,
               private _cdr: ChangeDetectorRef,
               private _searchFilm: SearchFilmsService,
+              private _favoritesService: FavoritesService,
               private _localStorageService: LocalStorage) {}
 
   static initYearsArray(): { currentYear: number, array: Array<number> } {
@@ -70,6 +72,10 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   addFilmToFavorite(id: OmdbResponseContent['imdbID']): void {
     console.log(id);
+    const film = this.filmsList.find(item => item.imdbID === id);
+    if (film) {
+      this._favoritesService.addToFavorites(film);
+    }
   }
 
   private _filter(value: string): string[] {
