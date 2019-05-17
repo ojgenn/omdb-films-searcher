@@ -9,7 +9,7 @@ import {
   MatAutocompleteModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatRadioModule,
   MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule,
   MatMenuModule, MatProgressBarModule, MatProgressSpinnerModule, MatSelectModule, MatSlideToggleModule, MatTabsModule,
-  MatToolbarModule, MatTooltipModule, MatButtonToggleModule, MatExpansionModule, MatDividerModule, MatChipsModule,
+  MatToolbarModule, MatTooltipModule, MatButtonToggleModule, MatExpansionModule, MatDividerModule, MatChipsModule, MatPaginatorModule,
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,7 +42,7 @@ const IMPORTS = [
 const MATERIAL_MODULES = [
   MatButtonModule, MatListModule, MatIconModule, MatCardModule,
   MatMenuModule, MatInputModule, MatTooltipModule, MatProgressBarModule,
-  MatGridListModule, MatSlideToggleModule, MatCheckboxModule, MatDialogModule,
+  MatGridListModule, MatSlideToggleModule, MatCheckboxModule, MatDialogModule, MatPaginatorModule,
   MatToolbarModule, MatFormFieldModule, MatAutocompleteModule, MatSelectModule,
   MatProgressSpinnerModule, MatTabsModule, MatButtonToggleModule, MatExpansionModule,
   MatDividerModule, MatChipsModule, MatRadioModule,
