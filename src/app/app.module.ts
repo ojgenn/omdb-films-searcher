@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   MatAutocompleteModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatRadioModule,
@@ -12,16 +13,24 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './pages/search/search.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { SearchResultsComponent } from './pages/search-results/search-results.component';
+import { HttpClientModule } from '@angular/common/http';
 
-const COMPONETNS = [
+const COMPONENTS = [
   AppComponent,
-  SearchComponent
+  SearchComponent,
+  HeaderComponent,
+  SearchResultsComponent,
 ];
 
 const IMPORTS = [
   BrowserModule,
   AppRoutingModule,
+  FormsModule,
+  HttpClientModule,
   BrowserAnimationsModule,
+  ReactiveFormsModule,
 ];
 
 const MATERIAL_MODULES = [
@@ -35,7 +44,7 @@ const MATERIAL_MODULES = [
 
 @NgModule({
   declarations: [
-    COMPONETNS,
+    COMPONENTS,
   ],
   imports: [
     IMPORTS,
@@ -43,6 +52,7 @@ const MATERIAL_MODULES = [
   ],
   exports: [MATERIAL_MODULES],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}
