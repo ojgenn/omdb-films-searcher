@@ -23,8 +23,21 @@ export class FavoritesService {
     if (!favorites) {
       favorites = [];
     }
-    favorites.push(film);
-    this._localStorageService.setItem('favorites', favorites);
-    this.favoritesList.emit(favorites);
+    const filmInCollection = favorites.find(item => item === film);
+    if (!filmInCollection) {
+      favorites.push(film);
+      this._localStorageService.setItem('favorites', favorites);
+      this.favoritesList.emit(favorites);
+    }
+  }
+
+  removeFromFavorites(id: OmdbResponseContent['imdbID']): void {
+    const favorites = this.favoritesList.value;
+    if (favorites) {
+      const index = favorites.findIndex(item => item.imdbID === id);
+      const modifiedFavorites = favorites.splice(index, 1);
+      this._localStorageService.setItem('favorites', modifiedFavorites);
+      this.favoritesList.emit(modifiedFavorites);
+    }
   }
 }
