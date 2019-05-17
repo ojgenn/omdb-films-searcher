@@ -1,3 +1,35 @@
-<p>
-  search works!
-</p>
+<div class="search">
+
+  <form class="example-form" [formGroup]="searchForm">
+
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Название фильма"
+             aria-label="filmName"
+             matInput
+             formControlName="filmName"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Год выпуска</mat-label>
+      <mat-select formControlName="year">
+        <mat-option *ngFor="let year of filmsSelectData.array" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary"
+            [disabled]="searchForm.invalid"
+            (click)="searchFilm()">
+      Найти
+    </button>
+
+  </form>
+</div>
