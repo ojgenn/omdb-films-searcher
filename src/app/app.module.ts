@@ -16,6 +16,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const COMPONENTS = [
   AppComponent,
@@ -30,6 +31,7 @@ const IMPORTS = [
   FormsModule,
   HttpClientModule,
   BrowserAnimationsModule,
+  ScrollingModule,
   ReactiveFormsModule,
 ];
 

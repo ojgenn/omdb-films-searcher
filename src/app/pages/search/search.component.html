@@ -32,4 +32,15 @@
     </button>
 
   </form>
+
+  <div *ngIf="errors" class="errors">
+    <mat-toolbar color="warn">Ошибки при поиске. *Список вывести дополнительно</mat-toolbar>
+  </div>
+
+  <div *ngIf="filmsList.length > 0">
+    <app-search-results [filmsList]="filmsList"
+                        (addToFavorite)="addFilmToFavorite($event)">
+
+    </app-search-results>
+  </div>
 </div>
