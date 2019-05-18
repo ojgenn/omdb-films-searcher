@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './pages/search/search.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
-import { FavoritesComponent } from './pages/favorites/favorites/favorites.component';
+import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const COMPONENTS = [
