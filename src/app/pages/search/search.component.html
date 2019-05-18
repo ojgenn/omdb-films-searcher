@@ -1,3 +1,51 @@
-<p>
-  search works!
-</p>
+<div class="search">
+
+  <form class="example-form" [formGroup]="searchForm">
+
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Название фильма"
+             aria-label="filmName"
+             matInput
+             formControlName="filmName"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Год выпуска</mat-label>
+      <mat-select formControlName="year">
+        <mat-option *ngFor="let year of filmsSelectData.array" [value]="year">
+          {{year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary"
+            [disabled]="searchForm.invalid"
+            (click)="searchFilm()">
+      Найти
+    </button>
+
+  </form>
+
+  <div *ngIf="errors" class="errors">
+    <mat-toolbar color="warn">Ошибки при поиске. *Список вывести дополнительно</mat-toolbar>
+  </div>
+
+  <div *ngIf="filmsList.length > 0">
+    <app-search-results [filmsList]="filmsList"
+                        [length]="length"
+                        [pageSize]="pageSize"
+                        [total]="total"
+                        (addToFavorite)="addFilmToFavorite($event)"
+                        (removeFilmFormFav)="removeFilmFormFav($event)"
+                        (pageChanged)="searchFilm($event)">
+
+    </app-search-results>
+  </div>
+</div>

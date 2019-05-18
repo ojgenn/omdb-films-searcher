@@ -1,0 +1,18 @@
+Всего найдено: {{total}}
+<mat-list role="list" *ngFor="let film of filmsList;trackBy: trackByFn">
+  <mat-list-item role="listitem">
+    <img [src]="film.Poster" [alt]="film.Title">
+    {{film.Title}}, {{film.Year}} г.
+    <button mat-icon-button *ngIf="favListIds.includes(film.imdbID); else addToFav">
+      <mat-icon color="warn" (click)="removeFilmFromFavorites(film.imdbID)">favorite</mat-icon>
+    </button>
+    <ng-template #addToFav>
+      <button mat-icon-button>
+        <mat-icon color="gray" (click)="addFilmToFavorites(film.imdbID)">favorite</mat-icon>
+      </button>
+    </ng-template>
+  </mat-list-item>
+</mat-list>
+<mat-paginator [length]="length"
+               [pageSize]="pageSize" (page)="onPaginatorChanged($event)">
+</mat-paginator>

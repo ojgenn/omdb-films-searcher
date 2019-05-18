@@ -1,0 +1,7 @@
+<mat-toolbar color="primary" class="header">
+  <span class="left-side-wrapper" [routerLink]="['/']">OMDb поиск фильмов</span>
+  <button mat-button [routerLink]="['favorites']">
+    <mat-icon>favorite</mat-icon>
+    <mat-label>Мой список ({{favoritesService.favoritesList?.value?.length || 0}})</mat-label>
+  </button>
+</mat-toolbar>
