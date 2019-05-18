@@ -14,5 +14,7 @@
   </mat-list-item>
 </mat-list>
 <mat-paginator [length]="length"
-               [pageSize]="pageSize" (page)="onPaginatorChanged($event)">
+               #paginator
+               [pageSize]="pageSize"
+               (page)="onPaginatorChanged($event)">
 </mat-paginator>

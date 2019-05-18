@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { OmdbResponseContent } from '../../commons/interfaces/omdb-response-content.interface';
 import { FavoritesService } from '../../services/favorites.service';
 import { ObservableHandler } from '../../utils/observable-handler';
+import { MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-search-results',
@@ -9,11 +10,16 @@ import { ObservableHandler } from '../../utils/observable-handler';
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnDestroy{
-
+  @ViewChild('paginator') paginator: MatPaginator;
   @Input() filmsList: Array<OmdbResponseContent>;
   @Input() total: number;
   @Input() length: number;
   @Input() pageSize: number;
+  @Input() set newSearch(newSearch: boolean) {
+    if (newSearch) {
+      this.paginator.pageIndex = 0;
+    }
+  }
   @Output() addToFavorite: EventEmitter<OmdbResponseContent['imdbID']> = new EventEmitter<OmdbResponseContent['imdbID']>();
   @Output() removeFilmFormFav: EventEmitter<OmdbResponseContent['imdbID']> = new EventEmitter<OmdbResponseContent['imdbID']>();
   @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
