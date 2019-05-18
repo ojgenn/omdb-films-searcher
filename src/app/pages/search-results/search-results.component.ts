@@ -52,9 +52,7 @@ export class SearchResultsComponent implements OnDestroy{
   }
 
   private _initFavList(favList: Array<OmdbResponseContent>): void {
-    if (favList) {
-      this.favListIds = favList.map(item => item.imdbID);
-    }
+    this.favListIds = favList ? favList.map(item => item.imdbID) : [];
   }
 
   ngOnDestroy(): void {
