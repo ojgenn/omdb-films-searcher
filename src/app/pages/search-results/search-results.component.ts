@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { OmdbResponseContent } from '../../commons/interfaces/omdb-response-content.interface';
 import { FavoritesService } from '../../services/favorites.service';
 import { ObservableHandler } from '../../utils/observable-handler';
@@ -8,7 +8,7 @@ import { ObservableHandler } from '../../utils/observable-handler';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss']
 })
-export class SearchResultsComponent {
+export class SearchResultsComponent implements OnDestroy{
 
   @Input() filmsList: Array<OmdbResponseContent>;
   @Input() total: number;
@@ -54,7 +54,12 @@ export class SearchResultsComponent {
   private _initFavList(favList: Array<OmdbResponseContent>): void {
     if (favList) {
       this.favListIds = favList.map(item => item.imdbID);
-      console.log(this.favListIds);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this._favList$$) {
+      this._favList$$.kill();
     }
   }
 
