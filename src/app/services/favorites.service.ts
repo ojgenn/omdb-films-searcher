@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
 import { LocalStorage } from './local-storage.service';
 import { SubjectHandler } from '../utils/subject-handler';
 import { OmdbResponseContent } from '../commons/interfaces/omdb-response-content.interface';
+import { objectCopy } from '../utils/object-copy';
 
 @Injectable({
   providedIn: 'root',
 })
 
-export class FavoritesService {
+export class FavoritesService implements OnDestroy {
   favoritesList = new SubjectHandler<Array<OmdbResponseContent>>();
 
   constructor(private _localStorageService: LocalStorage) {
@@ -32,12 +33,22 @@ export class FavoritesService {
   }
 
   removeFromFavorites(id: OmdbResponseContent['imdbID']): void {
-    const favorites = this.favoritesList.value;
+    let favorites = objectCopy(this.favoritesList.value);
     if (favorites) {
       const index = favorites.findIndex(item => item.imdbID === id);
-      const modifiedFavorites = favorites.splice(index, 1);
-      this._localStorageService.setItem('favorites', modifiedFavorites);
-      this.favoritesList.emit(modifiedFavorites);
+      if (favorites.length === 1) {
+        favorites = [];
+      } else {
+        favorites.splice(index, 1);
+      }
+      this._localStorageService.setItem('favorites', favorites);
+      this.favoritesList.emit(favorites);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.favoritesList) {
+      this.favoritesList.complete();
     }
   }
 }
