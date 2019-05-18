@@ -28,6 +28,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   length = 0;
   total = 0;
   pageSize = 0;
+  newSearch: boolean;
 
   private _searchFilmsSubscription$: Subscription;
 
@@ -61,6 +62,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   searchFilm(pageNumber?: number): void {
+    this.newSearch = !pageNumber;
     const filmName = this.searchForm.controls.filmName.value;
     const year = Number(this.searchForm.controls.year.value);
     this._prepareAndSaveOptions(filmName);
