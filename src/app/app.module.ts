@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
+import { ToastrModule } from 'ngx-toastr';
 import {
   MatAutocompleteModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatRadioModule,
   MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule,
@@ -19,6 +20,8 @@ import { HeaderComponent } from './pages/header/header.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { FavoriteFilmDetailsComponent } from './pages/favorites/favorite-film-details/favorite-film-details.component';
+import { IsFilmInFavoritesDirective } from './directives/is-film-in-favorites.directive';
 
 const COMPONENTS = [
   AppComponent,
@@ -27,12 +30,18 @@ const COMPONENTS = [
   SearchResultsComponent,
   FavoritesComponent,
   PageNotFoundComponent,
+  FavoriteFilmDetailsComponent,
+];
+
+const DIRECTIVES = [
+  IsFilmInFavoritesDirective,
 ];
 
 const IMPORTS = [
   BrowserModule,
   AppRoutingModule,
   FormsModule,
+  ToastrModule.forRoot(),
   HttpClientModule,
   BrowserAnimationsModule,
   ScrollingModule,
@@ -51,11 +60,13 @@ const MATERIAL_MODULES = [
 @NgModule({
   declarations: [
     COMPONENTS,
+    DIRECTIVES,
   ],
   imports: [
     IMPORTS,
     MATERIAL_MODULES,
   ],
+  entryComponents: [FavoriteFilmDetailsComponent],
   exports: [MATERIAL_MODULES],
   providers: [],
   bootstrap: [AppComponent],

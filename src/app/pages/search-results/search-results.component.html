@@ -1,5 +1,5 @@
 Всего найдено: {{total}}
-<mat-list role="list" *ngFor="let film of filmsList">
+<mat-list role="list" *ngFor="let film of filmsList;trackBy: trackByFn">
   <mat-list-item role="listitem">
     <img [src]="film.Poster" [alt]="film.Title">
     {{film.Title}}, {{film.Year}} г.
