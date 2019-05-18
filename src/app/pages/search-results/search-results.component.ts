@@ -7,19 +7,21 @@ import { MatPaginator } from '@angular/material';
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.scss']
+  styleUrls: ['./search-results.component.scss'],
 })
-export class SearchResultsComponent implements OnDestroy{
+export class SearchResultsComponent implements OnDestroy {
   @ViewChild('paginator') paginator: MatPaginator;
   @Input() filmsList: Array<OmdbResponseContent>;
   @Input() total: number;
   @Input() length: number;
   @Input() pageSize: number;
+
   @Input() set newSearch(newSearch: boolean) {
     if (newSearch) {
       this.paginator.pageIndex = 0;
     }
   }
+
   @Output() addToFavorite: EventEmitter<OmdbResponseContent['imdbID']> = new EventEmitter<OmdbResponseContent['imdbID']>();
   @Output() removeFilmFormFav: EventEmitter<OmdbResponseContent['imdbID']> = new EventEmitter<OmdbResponseContent['imdbID']>();
   @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
@@ -28,7 +30,7 @@ export class SearchResultsComponent implements OnDestroy{
 
   private _favList$$ = new ObservableHandler(
     this._favoritesService.favoritesList.observable,
-    this._initFavList.bind(this)
+    this._initFavList.bind(this),
   );
 
   constructor(private _favoritesService: FavoritesService) {
