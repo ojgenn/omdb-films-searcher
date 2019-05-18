@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Observable, Subscription } from 'rxjs';
@@ -10,14 +10,12 @@ import { SearchFilmsService } from '../../services/search-films.service';
 import { OmdbSearchResults } from '../../commons/interfaces/omdb-search-results.interface';
 import { FilmsSearchResponseType } from '../../commons/enums/films-search-response-type.enum';
 import { OmdbResponseContent } from '../../commons/interfaces/omdb-response-content.interface';
-import { safeDetectChanges } from '../../utils/safe-detect-changes';
 import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnInit, OnDestroy {
 
@@ -27,11 +25,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   filteredOptions: Observable<string[]>;
   filmsList: Array<OmdbResponseContent> = [];
   errors = false;
+  length = 0;
+  total = 0;
+  pageSize = 0;
 
   private _searchFilmsSubscription$: Subscription;
 
   constructor(private _formBuilder: FormBuilder,
-              private _cdr: ChangeDetectorRef,
               private _searchFilm: SearchFilmsService,
               private _favoritesService: FavoritesService,
               private _localStorageService: LocalStorage) {}
@@ -45,6 +45,13 @@ export class SearchComponent implements OnInit, OnDestroy {
     return { currentYear, array: array.reverse() };
   }
 
+  static getPageNumbers(total, lenght) {
+    if (total < lenght) {
+      return total;
+    }
+    return ((total % lenght) > 0) ? (Math.floor(total / lenght) + 1) : (total / lenght);
+  }
+
   ngOnInit() {
     this.filteredOptions = this.searchForm.controls.filmName.valueChanges.pipe(
       startWith(''),
@@ -52,26 +59,30 @@ export class SearchComponent implements OnInit, OnDestroy {
     );
   }
 
-  searchFilm() {
+  searchFilm(pageNumber?: number): void {
     const filmName = this.searchForm.controls.filmName.value;
     const year = Number(this.searchForm.controls.year.value);
     this._prepareAndSaveOptions(filmName);
     this._searchFilmsSubscription$ = this._searchFilm
-      .getFilms(filmName, year !== 0 ? year : undefined)
+      .getFilms(filmName, year !== 0 ? year : undefined, pageNumber)
       .subscribe((res: OmdbSearchResults) => {
         if (res.Response === FilmsSearchResponseType.True) {
           this.filmsList = res.Search;
           this.errors = false;
+          this.total = res.totalResults;
+          this.pageSize = res.Search.length;
+          this.length = SearchComponent.getPageNumbers(this.total, this.pageSize);
         } else {
           this.errors = true;
           this.filmsList = [];
+          this.total = 0;
+          this.pageSize = 0;
+          this.length = 0;
         }
-        safeDetectChanges(this._cdr);
       });
   }
 
   addFilmToFavorite(id: OmdbResponseContent['imdbID']): void {
-    console.log(id);
     const film = this.filmsList.find(item => item.imdbID === id);
     if (film) {
       this._favoritesService.addToFavorites(film);

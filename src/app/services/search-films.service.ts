@@ -14,10 +14,13 @@ const BASE_URL = 'http://www.omdbapi.com/?i=tt3896198&apikey=5d04a1ad';
 export class SearchFilmsService {
   constructor(private _http: HttpClient) {}
 
-  getFilms(searchString: string, year?: number): Observable<OmdbSearchResults> {
+  getFilms(searchString: string, year?: number, pageNumber?: number): Observable<OmdbSearchResults> {
     let query = `s=${searchString}`;
     if (year) {
       query += `&y=${year}`;
+    }
+    if (pageNumber) {
+      query += `&page=${pageNumber}`;
     }
     return this._http.get<OmdbSearchResults>(`${BASE_URL}&${query}`);
   }

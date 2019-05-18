@@ -1,13 +1,13 @@
-<mat-list role="list">
-  <cdk-virtual-scroll-viewport  style="height: 500px" itemSize="48" >
-    <ng-container *cdkVirtualFor="let film of filmsList">
-      <mat-list-item role="listitem">
-        <img [src]="film.Poster" [alt]="film.Title">
-        {{film.Title}}, {{film.Year}} г.
-        <button mat-icon-button>
-          <mat-icon color="primary" (click)="addFilmToFavorites(film.imdbID)">add</mat-icon>
-        </button>
-      </mat-list-item>
-    </ng-container>
-  </cdk-virtual-scroll-viewport>
+Всего найдено: {{total}}
+<mat-list role="list" *ngFor="let film of filmsList">
+  <mat-list-item role="listitem">
+    <img [src]="film.Poster" [alt]="film.Title">
+    {{film.Title}}, {{film.Year}} г.
+    <button mat-icon-button>
+      <mat-icon color="primary" (click)="addFilmToFavorites(film.imdbID)">add</mat-icon>
+    </button>
+  </mat-list-item>
 </mat-list>
+<mat-paginator [length]="length"
+               [pageSize]="pageSize" (page)="onPaginatorChanged($event)">
+</mat-paginator>
