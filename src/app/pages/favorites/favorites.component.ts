@@ -44,9 +44,9 @@ export class FavoritesComponent implements OnDestroy {
         data: {res}
       });
 
-      this._dialogRefSubscription = dialogRef.afterClosed().subscribe(id => {
-        if (id) {
-          this.deleteFilm(id);
+      this._dialogRefSubscription = dialogRef.afterClosed().subscribe(imdbID => {
+        if (imdbID) {
+          this.deleteFilm(imdbID);
         }
       });
 

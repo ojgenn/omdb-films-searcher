@@ -43,6 +43,7 @@
                         [pageSize]="pageSize"
                         [total]="total"
                         (addToFavorite)="addFilmToFavorite($event)"
+                        (removeFilmFormFav)="removeFilmFormFav($event)"
                         (pageChanged)="searchFilm($event)">
 
     </app-search-results>
