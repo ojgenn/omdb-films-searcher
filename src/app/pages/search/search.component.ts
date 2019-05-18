@@ -36,13 +36,14 @@ export class SearchComponent implements OnInit, OnDestroy {
               private _favoritesService: FavoritesService,
               private _localStorageService: LocalStorage) {}
 
-  static initYearsArray(): { currentYear: number, array: Array<number> } {
+  static initYearsArray(): { currentYear: number, array: Array<any> } {
     const currentYear = new Date().getFullYear();
-    const array = [];
+    let array = [];
     for (let i = 1986; i <= currentYear; i++) {
       array.push(i);
     }
-    return { currentYear, array: array.reverse() };
+    array = [...array, null].reverse();
+    return { currentYear, array };
   }
 
   static getPageNumbers(total, lenght) {
@@ -87,6 +88,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (film) {
       this._favoritesService.addToFavorites(film);
     }
+  }
+
+  removeFilmFormFav(id: OmdbResponseContent['imdbID']): void {
+    this._favoritesService.removeFromFavorites(id);
   }
 
   private _filter(value: string): string[] {

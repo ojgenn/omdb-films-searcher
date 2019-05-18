@@ -21,7 +21,6 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { FavoriteFilmDetailsComponent } from './pages/favorites/favorite-film-details/favorite-film-details.component';
-import { IsFilmInFavoritesDirective } from './directives/is-film-in-favorites.directive';
 
 const COMPONENTS = [
   AppComponent,
@@ -31,10 +30,6 @@ const COMPONENTS = [
   FavoritesComponent,
   PageNotFoundComponent,
   FavoriteFilmDetailsComponent,
-];
-
-const DIRECTIVES = [
-  IsFilmInFavoritesDirective,
 ];
 
 const IMPORTS = [
@@ -60,7 +55,6 @@ const MATERIAL_MODULES = [
 @NgModule({
   declarations: [
     COMPONENTS,
-    DIRECTIVES,
   ],
   imports: [
     IMPORTS,
