@@ -30,4 +30,8 @@ export class SearchResultsComponent {
     this.pageChanged.emit(pageIndex + 1);
   }
 
+  trackByFn(index: number, item: OmdbResponseContent): OmdbResponseContent['imdbID'] {
+    return item.imdbID;
+  }
+
 }

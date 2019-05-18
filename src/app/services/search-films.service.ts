@@ -4,8 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { OmdbSearchResults } from '../commons/interfaces/omdb-search-results.interface';
+import { OmdbResponseContent } from '../commons/interfaces/omdb-response-content.interface';
 
-const BASE_URL = 'http://www.omdbapi.com/?i=tt3896198&apikey=5d04a1ad';
+const BASE_URL = 'http://www.omdbapi.com/?apikey=5d04a1ad';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,10 @@ export class SearchFilmsService {
       query += `&page=${pageNumber}`;
     }
     return this._http.get<OmdbSearchResults>(`${BASE_URL}&${query}`);
+  }
+
+  getFilmById(id: OmdbResponseContent['imdbID']): Observable<any> {
+    return this._http.get<any>(`${BASE_URL}&plot=full&i=${id}`);
   }
 
 }
