@@ -4,6 +4,7 @@
   </div>
 
   <ng-template #notEmptyList>
+    <app-spinner [showSpinner]="showSpinner"></app-spinner>
     <cdk-virtual-scroll-viewport style="height: 90vh" itemSize="50" class="example-viewport">
       <mat-card class="example-card" *cdkVirtualFor="let item of favoritesService.favoritesList?.value">
         <div class="card-wrapper">

@@ -29,6 +29,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   total = 0;
   pageSize = 0;
   newSearch: boolean;
+  showSpinner = false;
 
   private _searchFilmsSubscription$: Subscription;
 
@@ -62,6 +63,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   searchFilm(pageNumber?: number): void {
+    this.showSpinner = true;
     this.newSearch = !pageNumber;
     const filmName = this.searchForm.controls.filmName.value;
     const year = Number(this.searchForm.controls.year.value);
@@ -69,20 +71,22 @@ export class SearchComponent implements OnInit, OnDestroy {
     this._searchFilmsSubscription$ = this._searchFilm
       .getFilms(filmName, year !== 0 ? year : undefined, pageNumber)
       .subscribe((res: OmdbSearchResults) => {
-        if (res.Response === FilmsSearchResponseType.True) {
-          this.filmsList = res.Search;
-          this.errors = false;
-          this.total = res.totalResults;
-          this.pageSize = res.Search.length;
-          this.length = SearchComponent.getPageNumbers(this.total, this.pageSize);
-        } else {
-          this.errors = true;
-          this.filmsList = [];
-          this.total = 0;
-          this.pageSize = 0;
-          this.length = 0;
-        }
-      });
+          if (res.Response === FilmsSearchResponseType.True) {
+            this.filmsList = res.Search;
+            this.errors = false;
+            this.total = res.totalResults;
+            this.pageSize = res.Search.length;
+            this.length = SearchComponent.getPageNumbers(this.total, this.pageSize);
+            this.showSpinner = false;
+          } else {
+            this._catchErrors();
+          }
+        },
+        err => {
+          this._catchErrors();
+          console.error(err);
+        },
+      );
   }
 
   addFilmToFavorite(id: OmdbResponseContent['imdbID']): void {
@@ -94,6 +98,15 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   removeFilmFormFav(id: OmdbResponseContent['imdbID']): void {
     this._favoritesService.removeFromFavorites(id);
+  }
+
+  private _catchErrors(): void {
+    this.errors = true;
+    this.filmsList = [];
+    this.total = 0;
+    this.pageSize = 0;
+    this.length = 0;
+    this.showSpinner = false;
   }
 
   private _filter(value: string): string[] {

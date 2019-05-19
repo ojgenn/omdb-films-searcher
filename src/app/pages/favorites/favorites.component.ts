@@ -13,11 +13,12 @@ import { FilmsSearchResponseType } from '../../commons/enums/films-search-respon
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.scss']
+  styleUrls: ['./favorites.component.scss'],
 })
 export class FavoritesComponent implements OnDestroy {
 
   favoritesList$: Observable<Array<OmdbResponseContent>>;
+  showSpinner = false;
   private _dialogRefSubscription: Subscription;
   private _searchFilmDetailsSubscription: Subscription;
 
@@ -31,26 +32,35 @@ export class FavoritesComponent implements OnDestroy {
   }
 
   showFilmDetails(id: OmdbResponseContent['imdbID']): void {
-    this._searchFilmDetailsSubscription = this._searchFilmsService.getFilmById(id).subscribe(res => {
-      if (res.Responce === FilmsSearchResponseType.False) {
-        this._toast.error('Ошибка (список будет расширен', '', {
-          timeOut: 2000,
-        });
-        return;
-      }
+    this.showSpinner = true;
+    this._searchFilmDetailsSubscription = this._searchFilmsService
+      .getFilmById(id)
+      .subscribe(res => {
+          this.showSpinner = false;
+          if (res.Responce === FilmsSearchResponseType.False) {
+            this._toast.error('Ошибка (список будет расширен', '', {
+              timeOut: 2000,
+            });
+            return;
+          }
 
-      const dialogRef: MatDialogRef<FavoriteFilmDetailsComponent> = this._dialog.open(FavoriteFilmDetailsComponent, {
-        width: '400px',
-        data: {res}
-      });
+          const dialogRef: MatDialogRef<FavoriteFilmDetailsComponent> = this._dialog.open(FavoriteFilmDetailsComponent, {
+            width: '400px',
+            data: { res },
+          });
 
-      this._dialogRefSubscription = dialogRef.afterClosed().subscribe(imdbID => {
-        if (imdbID) {
-          this.deleteFilm(imdbID);
-        }
-      });
+          this._dialogRefSubscription = dialogRef.afterClosed().subscribe(imdbID => {
+            if (imdbID) {
+              this.deleteFilm(imdbID);
+            }
+          });
 
-    });
+        },
+        err => {
+          this.showSpinner = false;
+          console.error(err);
+        },
+      );
   }
 
   ngOnDestroy() {
