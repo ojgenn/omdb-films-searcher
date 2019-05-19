@@ -1,5 +1,5 @@
 <div class="search">
-
+  <app-spinner [showSpinner]="showSpinner"></app-spinner>
   <form class="example-form" [formGroup]="searchForm">
 
     <mat-form-field class="example-full-width">
@@ -24,7 +24,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
     <button mat-raised-button color="primary"
             [disabled]="searchForm.invalid"
             (click)="searchFilm()">
