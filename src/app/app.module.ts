@@ -21,6 +21,7 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { FavoriteFilmDetailsComponent } from './pages/favorites/favorite-film-details/favorite-film-details.component';
+import { SpinnerComponent } from './pages/spinner/spinner.component';
 
 const COMPONENTS = [
   AppComponent,
@@ -30,6 +31,7 @@ const COMPONENTS = [
   FavoritesComponent,
   PageNotFoundComponent,
   FavoriteFilmDetailsComponent,
+  SpinnerComponent,
 ];
 
 const IMPORTS = [
