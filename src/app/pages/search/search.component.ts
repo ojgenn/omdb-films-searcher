@@ -25,7 +25,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   filteredOptions: Observable<string[]>;
   filmsList: Array<OmdbResponseContent> = [];
   errors = false;
-  length = 0;
   total = 0;
   pageSize = 0;
   newSearch: boolean;
@@ -48,10 +47,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     return { currentYear, array };
   }
 
-  static getPageNumbers(total, lenght) {
-    return ((total % lenght) > 0) ? (Math.floor(total / lenght) + 1) : (total / lenght);
-  }
-
   ngOnInit() {
     this.filteredOptions = this.searchForm.controls.filmName.valueChanges.pipe(
       startWith(''),
@@ -69,13 +64,10 @@ export class SearchComponent implements OnInit, OnDestroy {
       .getFilms(filmName, year !== 0 ? year : undefined, pageNumber)
       .subscribe((res: OmdbSearchResults) => {
           if (res.Response === FilmsSearchResponseType.True) {
-            console.log(res);
             this.filmsList = res.Search;
             this.errors = false;
             this.total = res.totalResults;
             this.pageSize = res.Search.length;
-            this.length = SearchComponent.getPageNumbers(this.total, this.pageSize);
-            console.log(this.length);
             this.showSpinner = false;
           } else {
             this._catchErrors();
@@ -104,7 +96,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.filmsList = [];
     this.total = 0;
     this.pageSize = 0;
-    this.length = 0;
     this.showSpinner = false;
   }
 
