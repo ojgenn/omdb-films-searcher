@@ -15,3 +15,11 @@ mat-list-item {
 mat-icon {
   color: gray;
 }
+
+.results-titles {
+  color: cornflowerblue;
+  &:hover, &:active {
+    color: dodgerblue;
+    cursor: pointer;
+  }
+}
