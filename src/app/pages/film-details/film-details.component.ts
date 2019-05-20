@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { AfterViewChecked, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { OmdbResponseContent } from '@app/commons/interfaces/omdb-response-content.interface';
 
@@ -18,7 +18,7 @@ interface FilmDetailData {
   templateUrl: './film-details.component.html',
   styleUrls: ['./film-details.component.scss']
 })
-export class FilmDetailsComponent {
+export class FilmDetailsComponent implements AfterViewChecked {
 
   filmDetailsMode = FilmDetailsMode;
 
@@ -30,6 +30,11 @@ export class FilmDetailsComponent {
         this.data.mode = FilmDetailsMode.ReadyToRemove;
       }
     }
+  }
+
+  ngAfterViewChecked() {
+    const el = document.querySelector('#filmDetailContent');
+    el.scrollIntoView();
   }
 
   close(): void {
