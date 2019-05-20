@@ -8,7 +8,7 @@ import { FavoritesService } from '@app/services/favorites.service';
 import { OmdbResponseContent } from '@app/commons/interfaces/omdb-response-content.interface';
 import { SearchFilmsService } from '@app/services/search-films.service';
 import { FilmsSearchResponseType } from '@app/commons/enums/films-search-response-type.enum';
-import { FavoriteFilmDetailsComponent } from '@app/pages/favorites/favorite-film-details/favorite-film-details.component';
+import { FilmDetailsComponent, FilmDetailsMode } from '@app/pages/film-details/film-details.component';
 
 @Component({
   selector: 'app-favorites',
@@ -44,14 +44,17 @@ export class FavoritesComponent implements OnDestroy {
             return;
           }
 
-          const dialogRef: MatDialogRef<FavoriteFilmDetailsComponent> = this._dialog.open(FavoriteFilmDetailsComponent, {
+          const dialogRef: MatDialogRef<FilmDetailsComponent> = this._dialog.open(FilmDetailsComponent, {
             width: '400px',
-            data: { res },
+            data: {
+              res,
+              mode: FilmDetailsMode.ReadyToRemove,
+            },
           });
 
-          this._dialogRefSubscription = dialogRef.afterClosed().subscribe(imdbID => {
-            if (imdbID) {
-              this.deleteFilm(imdbID);
+          this._dialogRefSubscription = dialogRef.afterClosed().subscribe(res => {
+            if (res) {
+              this.deleteFilm(res.id);
             }
           });
 

@@ -20,7 +20,7 @@ import { HeaderComponent } from './pages/header/header.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { FavoriteFilmDetailsComponent } from './pages/favorites/favorite-film-details/favorite-film-details.component';
+import { FilmDetailsComponent } from './pages/film-details/film-details.component';
 import { SpinnerComponent } from './pages/spinner/spinner.component';
 
 const COMPONENTS = [
@@ -30,7 +30,7 @@ const COMPONENTS = [
   SearchResultsComponent,
   FavoritesComponent,
   PageNotFoundComponent,
-  FavoriteFilmDetailsComponent,
+  FilmDetailsComponent,
   SpinnerComponent,
 ];
 
@@ -62,7 +62,7 @@ const MATERIAL_MODULES = [
     IMPORTS,
     MATERIAL_MODULES,
   ],
-  entryComponents: [FavoriteFilmDetailsComponent],
+  entryComponents: [FilmDetailsComponent],
   exports: [MATERIAL_MODULES],
   providers: [],
   bootstrap: [AppComponent],
