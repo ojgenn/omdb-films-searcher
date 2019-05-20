@@ -6,4 +6,6 @@ export interface OmdbResponseContent {
   Type: FilmType;
   Year: string;
   imdbID: string;
+  Director?: string;
+  Country?: string;
 }

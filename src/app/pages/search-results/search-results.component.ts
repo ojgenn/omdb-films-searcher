@@ -76,7 +76,7 @@ export class SearchResultsComponent implements OnDestroy {
       .getFilmById(id)
       .subscribe(res => {
           this.showSpinner = false;
-          if (res.Responce === FilmsSearchResponseType.False) {
+          if (res.Response === FilmsSearchResponseType.False) {
             this._toast.error('Ошибка (список будет расширен', '', {
               timeOut: 2000,
             });
@@ -92,15 +92,16 @@ export class SearchResultsComponent implements OnDestroy {
             },
           });
 
-          this._dialogRefSubscription = dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-              if (result.mode === FilmDetailsMode.ShowToAdd) {
-                this.addFilmToFavorites(result.id);
-              } else {
-                this.removeFilmFromFavorites(result.id);
+          this._dialogRefSubscription = dialogRef.afterClosed()
+            .subscribe((result: { mode: FilmDetailsMode; id: OmdbResponseContent['imdbID'] }) => {
+              if (result) {
+                if (result.mode === FilmDetailsMode.ShowToAdd) {
+                  this.addFilmToFavorites(result.id);
+                } else {
+                  this.removeFilmFromFavorites(result.id);
+                }
               }
-            }
-          });
+            });
 
         },
         err => {
