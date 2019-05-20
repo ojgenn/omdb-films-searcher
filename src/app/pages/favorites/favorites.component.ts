@@ -37,7 +37,7 @@ export class FavoritesComponent implements OnDestroy {
       .getFilmById(id)
       .subscribe(res => {
           this.showSpinner = false;
-          if (res.Responce === FilmsSearchResponseType.False) {
+          if (res.Response === FilmsSearchResponseType.False) {
             this._toast.error('Ошибка (список будет расширен', '', {
               timeOut: 2000,
             });
@@ -52,7 +52,8 @@ export class FavoritesComponent implements OnDestroy {
             },
           });
 
-          this._dialogRefSubscription = dialogRef.afterClosed().subscribe(result => {
+          this._dialogRefSubscription = dialogRef.afterClosed()
+            .subscribe((result: { mode: FilmDetailsMode; id: OmdbResponseContent['imdbID'] })  => {
             if (result) {
               this.deleteFilm(result.id);
             }
