@@ -10,7 +10,7 @@
       <mat-card-subtitle>Режиссер: {{data.res.Director}}</mat-card-subtitle>
     </mat-card-header>
 
-    <img mat-card-image [src]="data.res.Poster" [alt]="data.res.Title">
+    <img mat-card-image [src]="data.res.Poster === 'N/A' ? '/assets/img/poster_none.png' : data.res.Poster" [alt]="data.res.Title">
 
     <mat-card-content>
       <p>
