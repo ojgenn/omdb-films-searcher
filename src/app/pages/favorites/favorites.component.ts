@@ -1,14 +1,14 @@
 import { Component, OnDestroy } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { Observable, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-import { FavoritesService } from '../../services/favorites.service';
-import { OmdbResponseContent } from '../../commons/interfaces/omdb-response-content.interface';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { FavoriteFilmDetailsComponent } from './favorite-film-details/favorite-film-details.component';
-import { SearchFilmsService } from '../../services/search-films.service';
-import { FilmsSearchResponseType } from '../../commons/enums/films-search-response-type.enum';
+import { FavoritesService } from '@app/services/favorites.service';
+import { OmdbResponseContent } from '@app/commons/interfaces/omdb-response-content.interface';
+import { SearchFilmsService } from '@app/services/search-films.service';
+import { FilmsSearchResponseType } from '@app/commons/enums/films-search-response-type.enum';
+import { FavoriteFilmDetailsComponent } from '@app/pages/favorites/favorite-film-details/favorite-film-details.component';
 
 @Component({
   selector: 'app-favorites',
