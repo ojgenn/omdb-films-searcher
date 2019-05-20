@@ -9,7 +9,7 @@
       <mat-card class="example-card" *cdkVirtualFor="let item of favoritesService.favoritesList?.value">
         <div class="card-wrapper">
           <div class="image-wrapper">
-            <img mat-card-image [src]="item.Poster" [alt]="item.Title">
+            <img mat-card-image [src]="item.Poster === 'N/A' ? '/assets/img/poster_none.png' : item.Poster" [alt]="item.Title">
           </div>
           <div class="content-wrapper">
             <mat-card-header>
