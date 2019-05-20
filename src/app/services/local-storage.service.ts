@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { safe } from '../utils/safe';
+import { safe } from '@app/utils/safe';
 
 @Injectable({
   providedIn: 'root',

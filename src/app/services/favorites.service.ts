@@ -1,9 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 
-import { LocalStorage } from './local-storage.service';
-import { SubjectHandler } from '../utils/subject-handler';
-import { OmdbResponseContent } from '../commons/interfaces/omdb-response-content.interface';
-import { objectCopy } from '../utils/object-copy';
+import { SubjectHandler } from '@app/utils/subject-handler';
+import { objectCopy } from '@app/utils/object-copy';
+import { OmdbResponseContent } from '@app/commons/interfaces/omdb-response-content.interface';
+import { LocalStorage } from '@app/services/local-storage.service';
 
 @Injectable({
   providedIn: 'root',

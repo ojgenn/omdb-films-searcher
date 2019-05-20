@@ -1,4 +1,4 @@
-import { FilmType } from '../enums/film-type.enum';
+import { FilmType } from '@app/commons/enums/film-type.enum';
 
 export interface OmdbResponseContent {
   Poster: string;
