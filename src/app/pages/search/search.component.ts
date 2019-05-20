@@ -25,7 +25,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   filteredOptions: Observable<string[]>;
   filmsList: Array<OmdbResponseContent> = [];
   errors = false;
-  length = 0;
   total = 0;
   pageSize = 0;
   newSearch: boolean;
@@ -46,13 +45,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     array = [...array, null].reverse();
     return { currentYear, array };
-  }
-
-  static getPageNumbers(total, lenght) {
-    if (total < lenght) {
-      return total;
-    }
-    return ((total % lenght) > 0) ? (Math.floor(total / lenght) + 1) : (total / lenght);
   }
 
   ngOnInit() {
@@ -76,7 +68,6 @@ export class SearchComponent implements OnInit, OnDestroy {
             this.errors = false;
             this.total = res.totalResults;
             this.pageSize = res.Search.length;
-            this.length = SearchComponent.getPageNumbers(this.total, this.pageSize);
             this.showSpinner = false;
           } else {
             this._catchErrors();
@@ -105,7 +96,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.filmsList = [];
     this.total = 0;
     this.pageSize = 0;
-    this.length = 0;
     this.showSpinner = false;
   }
 
