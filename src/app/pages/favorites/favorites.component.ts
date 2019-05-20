@@ -52,9 +52,9 @@ export class FavoritesComponent implements OnDestroy {
             },
           });
 
-          this._dialogRefSubscription = dialogRef.afterClosed().subscribe(res => {
-            if (res) {
-              this.deleteFilm(res.id);
+          this._dialogRefSubscription = dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              this.deleteFilm(result.id);
             }
           });
 

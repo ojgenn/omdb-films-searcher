@@ -92,12 +92,12 @@ export class SearchResultsComponent implements OnDestroy {
             },
           });
 
-          this._dialogRefSubscription = dialogRef.afterClosed().subscribe(res => {
-            if (res) {
-              if (res.mode === FilmDetailsMode.ShowToAdd) {
-                this.addFilmToFavorites(res.id);
+          this._dialogRefSubscription = dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              if (result.mode === FilmDetailsMode.ShowToAdd) {
+                this.addFilmToFavorites(result.id);
               } else {
-                this.removeFilmFromFavorites(res.id);
+                this.removeFilmFromFavorites(result.id);
               }
             }
           });
