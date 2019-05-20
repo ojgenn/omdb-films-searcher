@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
-import { OmdbResponseContent } from '../../commons/interfaces/omdb-response-content.interface';
-import { FavoritesService } from '../../services/favorites.service';
-import { ObservableHandler } from '../../utils/observable-handler';
 import { MatPaginator } from '@angular/material';
+
+import { OmdbResponseContent } from '@app/commons/interfaces/omdb-response-content.interface';
+import { FavoritesService } from '@app/services/favorites.service';
+import { ObservableHandler } from '@app/utils/observable-handler';
 
 @Component({
   selector: 'app-search-results',

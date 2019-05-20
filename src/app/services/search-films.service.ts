@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { OmdbSearchResults } from '../commons/interfaces/omdb-search-results.interface';
-import { OmdbResponseContent } from '../commons/interfaces/omdb-response-content.interface';
+import { OmdbSearchResults } from '@app/commons/interfaces/omdb-search-results.interface';
+import { OmdbResponseContent } from '@app/commons/interfaces/omdb-response-content.interface';
 
 const BASE_URL = 'http://www.omdbapi.com/?apikey=5d04a1ad';
 

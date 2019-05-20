@@ -5,12 +5,12 @@ import { Observable, Subscription } from 'rxjs';
 import { startWith } from 'rxjs/internal/operators/startWith';
 import { map } from 'rxjs/operators';
 
-import { LocalStorage } from '../../services/local-storage.service';
-import { SearchFilmsService } from '../../services/search-films.service';
-import { OmdbSearchResults } from '../../commons/interfaces/omdb-search-results.interface';
-import { FilmsSearchResponseType } from '../../commons/enums/films-search-response-type.enum';
-import { OmdbResponseContent } from '../../commons/interfaces/omdb-response-content.interface';
-import { FavoritesService } from '../../services/favorites.service';
+import { LocalStorage } from '@app/services/local-storage.service';
+import { SearchFilmsService } from '@app/services/search-films.service';
+import { OmdbSearchResults } from '@app/commons/interfaces/omdb-search-results.interface';
+import { FilmsSearchResponseType } from '@app/commons/enums/films-search-response-type.enum';
+import { OmdbResponseContent } from '@app/commons/interfaces/omdb-response-content.interface';
+import { FavoritesService } from '@app/services/favorites.service';
 
 @Component({
   selector: 'app-search',
