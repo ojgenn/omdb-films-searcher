@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Platform } from '@angular/cdk/platform';
 
 @Component({
   selector: 'app-spinner',
@@ -6,7 +7,13 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./spinner.component.scss'],
 })
 export class SpinnerComponent {
-  @Input() showSpinner: boolean;
+  @Input() set showSpinner(showSpinner: boolean) {
+    this.show = showSpinner;
+    this.heightOfContent = window.innerHeight > document.body.scrollHeight ? window.innerHeight : document.body.scrollHeight;
+  }
 
-  constructor() { }
+  show: boolean;
+  heightOfContent: number;
+
+  constructor(public platform: Platform) { }
 }
