@@ -13,7 +13,7 @@
     </ng-template>
   </mat-list-item>
 </mat-list>
-<mat-paginator [length]="length"
+<mat-paginator [length]="total"
                #paginator
                [pageSize]="pageSize"
                (page)="onPaginatorChanged($event)">

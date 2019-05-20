@@ -49,9 +49,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   static getPageNumbers(total, lenght) {
-    if (total < lenght) {
-      return total;
-    }
     return ((total % lenght) > 0) ? (Math.floor(total / lenght) + 1) : (total / lenght);
   }
 
@@ -72,11 +69,13 @@ export class SearchComponent implements OnInit, OnDestroy {
       .getFilms(filmName, year !== 0 ? year : undefined, pageNumber)
       .subscribe((res: OmdbSearchResults) => {
           if (res.Response === FilmsSearchResponseType.True) {
+            console.log(res);
             this.filmsList = res.Search;
             this.errors = false;
             this.total = res.totalResults;
             this.pageSize = res.Search.length;
             this.length = SearchComponent.getPageNumbers(this.total, this.pageSize);
+            console.log(this.length);
             this.showSpinner = false;
           } else {
             this._catchErrors();
