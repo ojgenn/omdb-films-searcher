@@ -1,7 +1,7 @@
 <app-spinner [showSpinner]="showSpinner"></app-spinner>
-Всего найдено: {{total}}
-<mat-list role="list" *ngFor="let film of filmsList;trackBy: trackByFn">
-  <mat-list-item role="listitem">
+<span>Всего найдено: {{total}}</span>
+<mat-list role="list">
+  <mat-list-item role="listitem" *ngFor="let film of filmsList;trackBy: trackByFn">
     <img [src]="film.Poster === 'N/A' ? '/assets/img/poster_none.png' : film.Poster" [alt]="film.Title">
     <span (click)="showFilmDetails(film.imdbID)" class="results-titles">{{film.Title}}, {{film.Year}} г.</span>
     <button mat-icon-button *ngIf="favListIds.includes(film.imdbID); else addToFav">
