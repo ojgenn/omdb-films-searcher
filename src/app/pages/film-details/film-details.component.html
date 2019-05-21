@@ -18,17 +18,14 @@
       </p>
     </mat-card-content>
 
-    <mat-card-actions>
-      <button
-        mat-button
-        [color]="data.mode === filmDetailsMode.ReadyToRemove? 'warn' : 'primary'"
-        [mat-dialog-close]="{id: data.res.imdbID, mode: data.mode}">
-        {{data.mode === filmDetailsMode.ReadyToRemove ? 'Удалить' : 'Добавить'}}
-      </button>
-    </mat-card-actions>
-
   </mat-card>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions class="actions">
+    <button
+    mat-button
+    [color]="data.mode === filmDetailsMode.ReadyToRemove? 'warn' : 'primary'"
+    [mat-dialog-close]="{id: data.res.imdbID, mode: data.mode}">
+    {{data.mode === filmDetailsMode.ReadyToRemove ? 'Удалить' : 'Добавить'}}
+  </button>
   <button mat-button (click)="close()">Закрыть</button>
 </div>

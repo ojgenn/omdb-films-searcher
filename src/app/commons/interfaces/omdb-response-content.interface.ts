@@ -8,4 +8,5 @@ export interface OmdbResponseContent {
   imdbID: string;
   Director?: string;
   Country?: string;
+  Plot?: string;
 }
