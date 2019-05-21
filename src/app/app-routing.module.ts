@@ -9,14 +9,17 @@ const routes: Routes = [
   {
     path: '',
     component: SearchComponent,
+    data: { title: 'Поиск фильмов' }
   },
   {
     path: 'favorites',
     component: FavoritesComponent,
+    data: { title: 'Избранное' }
   },
   {
     path: '**',
     component: PageNotFoundComponent,
+    data: { title: '404' }
   },
 ];
 
